@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Session Words</title>
+	<style type="text/css">
+		#wrapper{
+			display: flex;
+			flex-direction: row;
+		}
+
+		#app_input{
+			width: 400px;
+		}
+
+		#divider{
+			width: 5px;
+			background-color: black;
+			height: 500px;
+			margin: auto 20px;
+		}
+
+		#app_output{
+			width: 400px;
+		}
+
+		.red{
+			color: red;
+		}
+
+		.green{
+			color: green;
+		}
+
+		.blue{
+			color: blue;
+		}
+
+		.big{
+			font-size: 2em;
+		}
+
+		.small{
+			font-size: 1em;
+		}
+
+		.tiny{
+			font-size: 10px;
+		}
+
+	</style>
+</head>
+<body>
+<div id='wrapper'>
+<div id='app_input'>
+	<form action='addwords' method='post'>
+		{% csrf_token %}
+		<label for='addword'>Add a new word</label>
+		<input type="text" name="addword">
+		<br>
+		<label for="color">Choose color</label>
+		<br>
+		<input hidden type="radio" name="color" value='null' checked>
+		<input type="radio" name="color" value='red'>Red<br>
+		<input type="radio" name="color" value='blue'>Blue<br>
+		<input type="radio" name="color" value='green'>Green<br>
+		<label for='bigfont'>show in BIG fonts!</label>
+		<input type="checkbox" name="bigfont">
+		<br>
+		<input type="submit" name="submit" value='Add to Session'>
+	</form>
+</div>
+<div id='divider'></div>
+<div id='app_output'>
+	<form action='clear' method='post'>
+		{% csrf_token %}
+		<input type="submit" name="name" value='Clear Session'>
+	</form>
+	{% for word in request.session.words%}
+	<p><span class='{{word.color}} {{word.font}}'>{{word.word}}</span><span class='tiny'> - added on {{word.time}}</span></p>
+	{%endfor%}
+</div>
+</div>
+</body>
+</html>
