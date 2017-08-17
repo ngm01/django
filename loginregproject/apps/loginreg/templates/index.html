@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login & Reg | Home</title>
+</head>
+<body>
+<h1>Registration</h1>
+<form action='register' method='post'>
+	{% csrf_token %}
+	<table>
+	<tr>
+	<td><label for='first_name'>First Name:</label></td>
+	<td><input type="text" name="first_name"></td>
+	</tr>
+	<tr>
+	<td><label for='last_name'>Last Name:</label></td>
+	<td><input type="text" name="last_name"></td>
+	</tr>
+	<tr>
+	<td><label for='email'>Email:</label></td>
+	<td><input type="text" name="email"></td>
+	</tr>
+	<tr>
+	<td><label for='password'>Password:</label></td>
+	<td><input type="password" name="password"></td>
+	</tr>
+	<tr>
+	<td><label for='pwconf'>Confirm Password:</label></td>
+	<td><input type="password" name="pwconf"></td>
+	</tr>
+	<tr>
+	<td><input type="submit" name="register" value="Register"></td>
+	</tr>
+	</table>
+</form>
+
+<h1>Login</h1>
+<form action='login' method='post'>
+	{% csrf_token %}
+	<table>
+	<tr>
+	<td><label for='login_email'>Email:</label></td>
+	<td><input type="text" name="login_email"></td>
+	</tr>
+	<tr>
+	<td><label for='login_password'>Password:</label></td>
+	<td><input type="password" name="login_password"></td>
+	</tr>
+	<tr>
+	<td><input type="submit" name="login" value='Login'></td>
+	</tr>
+	</table>
+</form>
+
+
+{% if messages %}
+<div id='messages'>
+<ul class>
+    {% for message in messages %}
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+</div>
+{% endif %}
+</body>
+</html>
