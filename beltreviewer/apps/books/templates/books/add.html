@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Book and Review</title>
+</head>
+<body>
+<h3>Add a New Book Title and a Review:</h3>
+<form action="/books/add_this" method="post">
+	{% csrf_token %}
+	<label for="title">Book Title:</label>
+	<input type="text" name="title">
+	<label>Author:</label>
+	<label for="listed_author">Choose from the list:</label>
+	<!-- In views, add a new author if no already-added author selected from dropdown, otherwise ignore new author field -->
+	{%if authors%}
+	<select name="listed_author">
+		{%for author in authors%}
+		<option value="{{author.name}}">{{author.name}}</option>
+		{%endfor%}
+	</select>
+	{%endif%}
+	<label for="new_author">Or add a new author:</label>
+	<input type="text" name="new_author">
+	<label for='review'>Review:</label>
+	<textarea name='review'></textarea>
+	<label for="rating">Rating:<select name='rating'>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	</select>
+	 stars.</label>
+	 <input type="submit" name="submit" value="Add Book and Review">
+</form>
+</body>
+</html>

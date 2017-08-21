@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Books Home</title>
+</head>
+<body>
+<div id="header">
+	<h3>Welcome {{user.name}}!</h3>
+	<ul>
+		<li><a href="/books/add">Add Book and Review</a></li>
+		<li><a href="/books/logout">Logout</a></li>
+	</ul>
+</div>
+<div id="main-block">
+<h3>Recent Book Reviews:</h3>
+<hr>
+{%for latest in latest_reviews%}
+<p>
+<p><a href="/books/{{latest.book.id}}">{{latest.book.title}}</a></p>
+<p>Rating:
+{{latest.rating}}: 
+{%for i in "xxxxx"%}
+{%if forloop.counter > latest.rating%}
+ BLANK
+ {%else%}
+ STAR
+{%endif%}
+{%endfor%}</p>
+<p><a href="#">{{latest.reviewer.user_name}}</a> says: {{latest.review}}</p>
+<p>Posted on {{latest.created_at}}</p>
+</p>
+<hr>
+{%endfor%}
+</div>
+<div id="side-box">
+	<h3>Other Books with Reviews:</h3>
+	{%for review in reviews%}
+	<p><a href="/books/{{review.book.id}}">{{review.book.title}}</a><p>
+	{%endfor%}
+</div>
+</body>
+</html>

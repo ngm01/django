@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Reviews for {{book.title}}</title>
+</head>
+<body>
+<div id="main">
+	<h3>{{book.title}}</h3>
+	<p>Author: {{book.author.name}}</p>
+	<h3>Reviews:</h3>
+	<hr>
+	{%for review in book.bookscomments.all%}
+	<p><a href="books/users/{{review.reviewer.id}}">{{review.reviewer.name}}</a> says: {{review.review}}</p>
+
+	<hr>
+	{%endfor%}
+</div>
+<div id="addbox">
+	<form action="books/add_review" method='post'>
+	{% csrf_token %}
+		<input type="hidden" name="book" value="{{book.id}}">
+		<input type="hidden" name="user" value="{{request.session.logged_in}}">
+		<label for="new_review"></label>
+		<textarea name="new_review"></textarea>
+		<label for="rating">Rating:<select name='rating'>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	</select>
+	 stars.</label>
+	 <input type="submit" name="submit" value="Submit Review">
+	</form>
+</div>
+</body>
+</html>
